@@ -31,21 +31,16 @@ class AddDefaultGroup
         $this->settings = $settings;
     }
 
-    private function isIllini(User $user) {
-        $il = "@illinois.edu";
-        $length = strlen($il);
-        if ($length == 0) {
-            return false;
-        }
-
-        return (substr($user->email, -$length) === $il);
-    }
-
     public function handle(Activated $event) {
         $defaultGroup = $this->settings->get('fof-default-group.group');
 
-        if ($defaultGroup != null && (int) $defaultGroup !== Group::MEMBER_ID && isIllini($event->user)) {
-            $event->user->groups()->attach($defaultGroup);
-        }
+        $il = "@illinois.edu";
+        $length = strlen($il);
+
+        if ($length != 0 && substr($user->email, -$length) === $il) {
+            if ($defaultGroup != null && (int) $defaultGroup !== Group::MEMBER_ID) {
+                $event->user->groups()->attach($defaultGroup);
+            }
+        }   
     }
 }
