@@ -1,6 +1,6 @@
 {
   "name": "fof/default-group",
-  "description": "Assign a default group to new users automatically",
+  "description": "自动分配邮箱以@illinois.edu结尾的用户至某一用户组 (by Eric)",
   "keywords": [
     "flarum"
   ],
@@ -19,6 +19,9 @@
       "name": "David Sevilla Martín",
       "email": "david.s@redevs.org",
       "role": "Developer"
+    },
+    {
+      "name": "Eric Liu"
     }
   ],
   "autoload": {
@@ -28,7 +31,7 @@
   },
   "extra": {
     "flarum-extension": {
-      "title": "FoF Default Group",
+      "title": "Auto Illini",
       "icon": {
         "name": "fas fa-users",
         "backgroundColor": "#e74c3c",
