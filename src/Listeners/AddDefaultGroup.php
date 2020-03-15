@@ -34,13 +34,12 @@ class AddDefaultGroup
     public function handle(Activated $event) {
         $defaultGroup = $this->settings->get('fof-default-group.group');
 
-        $il = "@illinois.edu";
-        $length = strlen($il);
+        $domain = "@illinois.edu";
+        $len = strlen($domain);
+        // error_log(substr($event->user->email, -$len));
 
-        if ($length != 0 && substr($user->email, -$length) === $il) {
-            if ($defaultGroup != null && (int) $defaultGroup !== Group::MEMBER_ID) {
-                $event->user->groups()->attach($defaultGroup);
-            }
-        }   
+        if ($defaultGroup != null && (int) $defaultGroup !== Group::MEMBER_ID && substr($event->user->email, -$len) === $domain) {
+            $event->user->groups()->attach($defaultGroup);
+        }
     }
 }
